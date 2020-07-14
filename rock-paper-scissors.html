@@ -1,11 +1,24 @@
 <script>
-    function game() {
+
+
+    function game(playerScore, computerScore) {
+        
+        function playerWin(){
+            playerScore++;
+        }
+
+        function computerWin(){
+            computerScore++;
+        }
 
         var playerScore = 0;
         var computerScore = 0;
-        let scores = 'Player:' + playerScore + " : Computer: " + computerScore
+        let scores = 'Player:' + playerScore + " : Computer: " + computerScore;
 
+        function computerPlay() {
+            return options[Math.floor(Math.random() * options.length)]
 
+        }
 
         function playRound(playerSelection, computerSelection) {
             let playerInput = playerSelection.toLowerCase();
@@ -13,31 +26,27 @@
             // Player wins
             if ((playerInput === 'rock' && computerSelection === 'scissors')
                 || (playerInput === 'scissors' && computerSelection === 'paper')) {
-                playerScore++;
-                return ("You win! " + playerInput + " " + "beats" + " " + computerSelection);
+                playerWin;
+                return (playerScore);
             }
             // Player loses
             else if ((playerInput === 'rock' && computerSelection === 'paper')
                 || (playerInput === 'paper' && computerSelection === 'scissors')
                 || (playerInput === 'scissors' && computerSelection === 'rock')) {
-                computerScore++;
-                return ("You lose! " + computerSelection + " " + "beats" + " " + playerInput);
+                computerWin;
+                return (computerScore)
             }
             // Draw
             else if (playerSelection && computerSelection === 'rock' || 'paper' || "scissors") {
-                return ("You draw! " + playerInput + " " + "draws" + " " + computerSelection);
             }
-        }
-
-        function computerPlay() {
-            return options[Math.floor(Math.random() * options.length)]
-
         }
         const options = ["rock", "paper", "scissors"];
         const playerSelection = 'rock';
-        const computerSelection = computerPlay()
-        
+        const computerSelection = computerPlay();
+
+        return (scores);
     }
-    console.log(game())
+    console.log(game());
+
 
 </script>
