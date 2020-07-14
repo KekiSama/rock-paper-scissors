@@ -1,17 +1,39 @@
 <script>
-const options = ["rock", "paper", "scissors"];
+function game(){        
+        var playerScore = 0;
+        var computerScore = 0;
+        let scores = 'Player:' + playerScore + " : Computer: " + computerScore
 
-function computerPlay(){
-    return options[Math.floor(Math.random() * options.length)]
-    
+        function computerPlay() {
+            return options[Math.floor(Math.random() * options.length)]
+
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            let playerInput = playerSelection.toLowerCase();
+
+            // Player wins
+            if ((playerInput === 'rock' && computerSelection === 'scissors')
+                || (playerInput === 'scissors' && computerSelection === 'paper')) {
+                playerScore++;
+                return (scores + ("You win! " + playerInput + " " + "beats" + " " + computerSelection));
+            }
+            // Player loses
+            else if ((playerInput === 'rock' && computerSelection === 'paper')
+                || (playerInput === 'paper' && computerSelection === 'scissors')
+                || (playerInput === 'scissors' && computerSelection === 'rock')) {
+                computerScore++;
+                return ("You lose! " + computerSelection + " " + "beats" + " " + playerInput);
+            }
+            // Draw
+            else if (playerSelection && computerSelection === 'rock' || 'paper' || "scissors") {
+                return ("You draw! " + playerInput + " " + "draws" + " " + computerSelection);
+            }
+        }
 }
-
-function playRound(playerSelection, computerSelection){
-var playerInput = playerSelection.toLowerCase();
-alert("You lose! " + playerInput + " " + "beats" + " " + computerSelection);
-}
-
-const playerSelection = 'rOck'
-const computerSelection = computerPlay()
-console.log(playRound(playerSelection, computerSelection))
+        
+        const options = ["rock", "paper", "scissors"];
+        const playerSelection = 'rock';
+        const computerSelection = computerPlay()
+        console.log(playRound(playerSelection, computerSelection))
 </script>
