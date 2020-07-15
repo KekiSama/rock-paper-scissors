@@ -1,52 +1,63 @@
 <script>
+    let options = ["rock", "paper", "scissors"];
+    const playerSelection = '';
+    const computerSelection = computerPlay();
+    let pScore = 0;
+    let cScore = 0;
+    let rounds = 0;
 
-
-    function game(playerScore, computerScore) {
-        
-        function playerWin(){
-            playerScore++;
-        }
-
-        function computerWin(){
-            computerScore++;
-        }
-
-        var playerScore = 0;
-        var computerScore = 0;
-        let scores = 'Player:' + playerScore + " : Computer: " + computerScore;
-
-        function computerPlay() {
-            return options[Math.floor(Math.random() * options.length)]
-
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            let playerInput = playerSelection.toLowerCase();
-
-            // Player wins
-            if ((playerInput === 'rock' && computerSelection === 'scissors')
-                || (playerInput === 'scissors' && computerSelection === 'paper')) {
-                playerWin;
-                return (playerScore);
-            }
-            // Player loses
-            else if ((playerInput === 'rock' && computerSelection === 'paper')
-                || (playerInput === 'paper' && computerSelection === 'scissors')
-                || (playerInput === 'scissors' && computerSelection === 'rock')) {
-                computerWin;
-                return (computerScore)
-            }
-            // Draw
-            else if (playerSelection && computerSelection === 'rock' || 'paper' || "scissors") {
-            }
-        }
-        const options = ["rock", "paper", "scissors"];
-        const playerSelection = 'rock';
-        const computerSelection = computerPlay();
-
-        return (scores);
+    function computerPlay() {
+        let value = options[Math.floor(Math.random() * options.length)];
+        return value;
     }
-    console.log(game());
+    function pInput(){
+    let choice = prompt('selection?').toLowerCase();
+    return choice; 
+    }
+    function playRound(playerSelection, computerSelection) {
+        playerSelection = pInput();
+        computerSelection = computerPlay();
+        // If Player wins        
+        if ((playerSelection === 'rock') && (computerSelection === 'scissors')) {
+            pScore++;
+            return ('You win. Player: ' + pScore + ' Computer: ' + cScore);
+        }
+        else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
+            pScore++;
+            return ('You win. Player: ' + pScore + ' Computer: ' + cScore);
+        }
+        else if ((playerSelection === 'scissors') && (computerSelection === 'paper')) {
+            pScore++;
+            return ('You win. Player: ' + pScore + ' Computer: ' + cScore);
+        } // If computer wins
+        else if ((playerSelection === 'paper') && (computerSelection === 'scissors')) {
+            cScore++;
+            return ('You lose. Player: ' + pScore + ' Computer: ' + cScore);
+        }
+        else if ((playerSelection === 'scissors') && (computerSelection === 'rock')) {
+            cScore++;
+            return ('You lose. Player: ' + pScore + ' Computer: ' + cScore);
+        }
+        else if ((playerSelection === 'rock') && (computerSelection === 'paper')) {
+            cScore++;
+            return ('You lose. Player: ' + pScore + ' Computer: ' + cScore);
+        }   // Draw
+        else if (playerSelection == computerSelection)
+            return ('Tie. Player: ' + pScore + ' Computer: ' + cScore);
+    }
+
+    function game() {
+        if (rounds < 4) {
+            playRound;
+            rounds++;
+            console.log(playRound(playerSelection, computerSelection))
+        }
+        else {
+            return ('Game is finished.')
+        }
+    }
+
+    console.log(playRound(playerSelection, computerSelection))
 
 
 </script>
